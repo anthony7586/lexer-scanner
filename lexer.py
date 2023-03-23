@@ -32,7 +32,8 @@ def lexer():
 
 # program to read file char by char 
 #will put chars together to form a word and will do the same to put a number together 
-
+    lexemes = []
+    tokens = []
 
     word = '' # this will hold the string 
     number = '' # this will be a number 
@@ -60,7 +61,9 @@ def lexer():
                        # print("keyword = "+ word) #print keyword   TOKEN
                         f = open("output.txt", "a")
                         f.write("Keyword =        "+ word + "\n")
-                        f.close() 
+                        f.close()
+                        tokens.append("keyword")
+                        lexemes.append(word) 
                         word = ''                 #clear the word                        
 
                     if (is_keyword(word) == False) and word != ' 'and word != '' and (is_operator(ch) == False) and (is_seperator(ch) == False):
@@ -68,6 +71,8 @@ def lexer():
                         f = open("output.txt", "a")
                         f.write("identifier =       "+ word + "\n")
                         f.close() 
+                        tokens.append("Identifier")
+                        lexemes.append(word)                         
                         word = ''                 #clear the word
 
                  
@@ -85,6 +90,8 @@ def lexer():
                          f = open("output.txt", "a")
                          f.write("real =            "+ number + "\n")
                          f.close() 
+                         tokens.append("real")
+                         lexemes.append(number)
                          number = '' #clear the number variable 
                          current_numeric_state = 3 
 
@@ -101,14 +108,28 @@ def lexer():
                      #print("separator = " + ch) #prints the character (seperator)
                      f = open("output.txt", "a")
                      f.write("separator =       "+ ch + "\n")
-                     f.close()  
+                     f.close()
+                     tokens.append("seperator")
+                     lexemes.append(ch)
 
 
                  if is_operator(ch) == True:                                        #  TOKEN
                      #print ("operator = "+ ch)    
                      f = open("output.txt", "a")
                      f.write("operator =        "+ ch + "\n")
-                     f.close()                 
+                     f.close()
+                     tokens.append("operator")
+                     lexemes.append(ch)    
+
+
+
+        class both_outputs:
+            def __init__(scan_output):
+                scan_output.tokens = tokens
+                scan_output.lexemes = lexemes     
+
+
+        return both_outputs     #returns both the ouputs                    
                
         
 

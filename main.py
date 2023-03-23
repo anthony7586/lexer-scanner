@@ -34,7 +34,8 @@ f.write("Token__________Lexeme\n")
 f.write("_____________________\n")
 f.close()
 
-lexer() #the FSM will be within the lexer function 
+lexer() #the FSM will be within the lexer function
+        #lexer funtion returns the tokens and lexemes 
 
 #open and read the file after writing to it
 f = open("output.txt", "r")
